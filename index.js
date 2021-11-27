@@ -17,6 +17,34 @@ app.use(session({
     saveUninitialized : false
 })) // Configuramos servidor para trabajar con sesiones
 
+app.get("/registro1", (req, res) => {
+    res.render('registro1')
+})
+
+app.get("/registro2", (req, res) => {
+    res.render('registro2')
+})
+
+app.get("/registro3", (req, res) => {
+    res.render('registro3')
+})
+
+app.get("/registro4", (req, res) => {
+    res.render('registro4')
+})
+
+app.get("/registro5", (req, res) => {
+    res.render('registro5')
+})
+
+app.get("/reg_vali", (req, res) => {
+    res.render('reg_vali')
+})
+
+app.get("/reglas", (req, res) => {
+    res.render('reglas')
+})
+
 app.get('/clienteVsimple', async (req, res) => {
     const clientes = await db.Cliente.findAll({
         order : [
