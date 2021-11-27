@@ -14,6 +14,9 @@ module.exports = {
       hora_inicio: {
         type: Sequelize.DATE
       },
+      duracion: {
+        type: Sequelize.INTEGER
+      },
       factor_A: {
         type: Sequelize.FLOAT
       },
