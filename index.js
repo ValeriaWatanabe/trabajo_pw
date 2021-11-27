@@ -132,3 +132,28 @@ app.get('/categoria/eliminar/:codigo', async (req, res) => {
 app.listen(PORT, () => {
     console.log('Se ha iniciado el servidor en el puerto ' + PORT)
 })
+
+app.get("/", async (req, res)  =>{
+    const banners = await db.Banners.findAll({
+        order : [
+            ['id', 'ASC']
+        ]
+    });
+    res.render('pagina_inicio', {
+        banners : banners
+    })
+})
+
+app.get('/', async (req, res)=>{
+    const partida = await db.Partida.findAll({
+        order :[
+            ['id', 'ASC']
+        ]
+    });
+
+    //console.log(partidas);
+    res.render('lista_partidas',{
+        partida: partida
+    })
+
+})

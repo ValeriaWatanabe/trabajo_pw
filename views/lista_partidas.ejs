@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>TIM-BEAR</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/estilos/index.css">    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    </head>
+
+    
+
+    <body class="container">
+        
+      
+        <h3 class="display-2 proximos"><b>Lista de Partidas</b></h3>
+        <div class="row mt-4"> 
+        </div>
+        <div class="container">
+            <div class="mt-2 row"> 
+                <div class="col-9"> 
+                    <div class="card">
+                        <div class="card-header">
+                            Tabla
+                        </div>
+                        <div class="card-body">
+                            <table class="table col-6" >
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>Juego</th>
+                                        <th>Fecha</th>
+                                        <th>Hora_inicio</th>
+                                        <th>Equipo_A</th>
+                                        <th>Equipo_B</th>
+                                        <th>Factor_A</th>
+                                        <th>Factor_Empate</th>
+                                        <th>Factor_B</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    <% partida.forEach((partida) => { %>
+                                            <tr>
+                                                <td><%=partida.id_juego%></td>
+                                                <td><%=partida.fecha.toISOString().substring(0,10)%> </td>
+                                                <td><%=partida.hora_inicio%> </td>
+                                                <td><%=partida.equipo_A%> </td>
+                                                <td><%=partida.equipo_B%> </td>
+                                                <td><%=partida.factor_A%> </td>
+                                                <td><%=partida.factor_X%> </td>
+                                                <td><%=partida.factor_B%> </td>
+                                                
+                                            </tr>
+                                            <% }) %>
+                                </tbody>
+                
+                
+                            </table>
+                            
+                        </div>
+        
+                    </div>
+    
+    
+                </div>
+                
+    
+            </div>
+
+        </div>
+
+    
+    </body>
+</html> 
+    </body>
+</html>
