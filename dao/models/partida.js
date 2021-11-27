@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Partida.init({
     fecha: DataTypes.DATE,
     hora_inicio: DataTypes.DATE,
+    duracion: DataTypes.INTEGER,
     factor_A: DataTypes.FLOAT,
     factor_B: DataTypes.FLOAT,
     factor_X: DataTypes.FLOAT,
