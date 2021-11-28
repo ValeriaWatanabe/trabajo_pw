@@ -10,34 +10,37 @@
         <div class="container p-3 mb-2 bg-info text-dark">
             <p class="text-center fs-1 fw-bold">Abrir Cuenta</p>
         </div>
-        <div class="mt-4"> 
-            <h1 class="text-center">Identificación</h1>
-        </div>
-        <div class="container mt-4">
-            <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">DNI</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="DNI">
-              </div>
-              <div class="mb-3">
-                <label for="formGroupExampleInput2" class="form-label">Foto de Perfil</label>
-                <div class="text-center">
-                    <button>
-                        <img src="/imagenes/fotoPerfil.jpg" class="img-thumbnail">
-                    </button>
-                </div>
-              </div>
-        </div>
+        <form method="post" action="/crearRegistro">
 
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col text-end">
-                    <a class="btn btn-dark fs-5" href="/registro1">Regresar</a>
-                </div>
-                <div class="col text-start">
-                    <a class="btn btn-danger fw-bold fs-5" href="/registro3">Siguiente</a>
-              </div>
+            <div class="mt-4"> 
+                <h1 class="text-center">Identificación</h1>
             </div>
-        </div>
+            <div class="container mt-4">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">DNI</label>
+                    <input name="dni_cliente" type="text" class="form-control" id="formGroupExampleInput" placeholder="DNI">
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label">Foto de Perfil</label>
+                    <div class="text-center">
+                        <button>
+                            <img src="/imagenes/fotoPerfil.jpg" class="img-thumbnail">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col text-end">
+                        <a class="btn btn-dark fs-5" href="/registro1">Regresar</a>
+                    </div>
+                    <div class="col text-start">
+                        <a class="btn btn-danger fw-bold fs-5" href="/registro3">Siguiente</a>
+                    </div>
+                </div>
+            </div>
+        </form>
     </body>
 
 </html>
