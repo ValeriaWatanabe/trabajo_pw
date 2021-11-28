@@ -29,12 +29,22 @@ app.get("/registro3", (req, res) => {
     res.render('registro3')
 })
 
-app.get("/registro4", (req, res) => {
+app.get("/registro4", async (req, res) => {
     res.render('registro4')
 })
 
 app.get("/registro5", (req, res) => {
     res.render('registro5')
+})
+
+app.post("/crearRegistro", (req, res) => {
+    const nombre = req.body.nombre_cliente
+    const apellido = req.body.apellido_cliente
+    const dni = req.body.dni_cliente
+    const correo = req.body.correo_cliente
+    const contrasena = req.body.contrasena_cliente
+    const telefono = req.body.telefono_cliente
+
 })
 
 app.get("/reg_vali", (req, res) => {
@@ -131,29 +141,4 @@ app.get('/categoria/eliminar/:codigo', async (req, res) => {
 
 app.listen(PORT, () => {
     console.log('Se ha iniciado el servidor en el puerto ' + PORT)
-})
-
-app.get("/", async (req, res)  =>{
-    const banners = await db.Banners.findAll({
-        order : [
-            ['id', 'ASC']
-        ]
-    });
-    res.render('pagina_inicio', {
-        banners : banners
-    })
-})
-
-app.get('/', async (req, res)=>{
-    const partida = await db.Partida.findAll({
-        order :[
-            ['id', 'ASC']
-        ]
-    });
-
-    //console.log(partidas);
-    res.render('lista_partidas',{
-        partida: partida
-    })
-
 })
