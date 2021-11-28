@@ -29,12 +29,22 @@ app.get("/registro3", (req, res) => {
     res.render('registro3')
 })
 
-app.get("/registro4", (req, res) => {
+app.get("/registro4", async (req, res) => {
     res.render('registro4')
 })
 
 app.get("/registro5", (req, res) => {
     res.render('registro5')
+})
+
+app.post("/crearRegistro", (req, res) => {
+    const nombre = req.body.nombre_cliente
+    const apellido = req.body.apellido_cliente
+    const dni = req.body.dni_cliente
+    const correo = req.body.correo_cliente
+    const contrasena = req.body.contrasena_cliente
+    const telefono = req.body.telefono_cliente
+
 })
 
 app.get("/reg_vali", (req, res) => {
@@ -48,3 +58,6 @@ app.get("/reglas", (req, res) => {
 app.listen(PORT, () => {
     console.log('Se ha iniciado el servidor en el puerto ' + PORT)
 })
+//https://www.npmjs.com/package/express-fileupload
+//https://sequelize.org/master/manual/model-querying-basics.html#operators
+//https://www.youtube.com/watch?v=8jNB0UXOfZo
