@@ -140,7 +140,7 @@ app.post('/cliente_vsimple/modificar', async (req, res) => {
     const correo = req.body.cliente_correo
     const telefono = req.body.cliente_numero
 
-    const cliente = await db.Clientes.findOne({
+    const cliente = await db.Cliente.findOne({
         where : {
             id : idCliente
         }
