@@ -314,7 +314,7 @@ module.exports = {
     {
       nombre : "banner_barcelona",
       estado : true,
-      url : "ttps://www.fcbarcelona.es/photo/2018/11/20/834ece80-df2a-489c-83c6-dae087b73f4d/Camp-Nou.jpg",
+      url : "https://www.fcbarcelona.es/photo/2018/11/20/834ece80-df2a-489c-83c6-dae087b73f4d/Camp-Nou.jpg",
       url_destino : "https://www.fcbarcelona.es/es/",
       createdAt : new Date(), 
       updatedAt : new Date()
