@@ -48,7 +48,7 @@ app.get("/lista_partidas" , async (req,res) =>{
     const partidas = await db.Partida.findAll({
 
         where : {
-        estado : "iniciado"
+        estado : "pendiente"
         }
     })
 
@@ -68,33 +68,52 @@ app.get("/lista_partidas" , async (req,res) =>{
 
 })
 
-app.get("/registro1", (req, res) => {
-    res.render('registro1')
+app.get("/lista_partidas/leja_cerca", async (req, res) => {
+    const lista_partidas = await db.Partida.findAll({
+        order : [
+            ['fecha', 'DESC']
+        ]
+    });
+
+    res.render('lista_partidas',{
+        partidas : lista_partidas
+    })
 })
 
-app.get("/registro2", (req, res) => {
-    res.render('registro2')
+app.get("/registro", (req, res) => {
+    res.render('registro')
 })
 
-app.get("/registro3", (req, res) => {
-    res.render('registro3')
-})
-
-app.get("/registro4", async (req, res) => {
-    res.render('registro4')
-})
-
-app.get("/registro5", (req, res) => {
-    res.render('registro5')
-})
-
-app.post("/crearRegistro", (req, res) => {
+app.post("/crearRegistro", async (req, res) => {
     const nombre = req.body.nombre_cliente
     const apellido = req.body.apellido_cliente
     const dni = req.body.dni_cliente
     const correo = req.body.correo_cliente
+    const numero = req.body.telefono_cliente
+    const departamento = req.body.departamento_cliente
+    const provincia = req.body.provincia_cliente
+    const distrito = req.body.distrito_cliente
+    const direccion = req.body.direccion_cliente
+    const pep = req.body.pep
+    const estado = 'Validado'
     const contrasena = req.body.contrasena_cliente
-    const telefono = req.body.telefono_cliente
+    const c2 = req.body.contrasena_2
+
+    await db.Cliente.create({
+        nombre : nombre,
+        apellido : apellido,
+        dni : dni,
+        correo : correo,
+        numero : numero,
+        departamento : departamento,
+        provincia : provincia,
+        distrito : distrito,
+        direccion : direccion,
+        pep : pep,
+        estado : estado,
+        contrasena : contrasena
+    })
+    res.redirect('/reg_vali')
 
 })
 
