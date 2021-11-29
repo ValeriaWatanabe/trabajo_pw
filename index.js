@@ -70,7 +70,7 @@ app.get('/clienteVsimple', async (req, res) => {
 app.get('/cliente_vsimple/modificar/:codigo', async (req, res) => {
     const idCliente = req.params.codigo
 
-    const cliente = await db.Clientes.findOne({
+    const cliente = await db.Cliente.findOne({
         where : {
             id : idCliente
         }
