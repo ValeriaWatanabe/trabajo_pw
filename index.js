@@ -48,7 +48,7 @@ app.get("/lista_partidas" , async (req,res) =>{
     const partidas = await db.Partida.findAll({
 
         where : {
-        estado : "iniciado"
+        estado : "pendiente"
         }
     })
 
@@ -221,6 +221,67 @@ app.get('/clienteVcompleta', async (req, res) => {
     res.render('cliente_vcompleta', {
         clientes : nuevaListaClientes
     })
+})
+
+app.get('/cliente_vcompleta/modificar/:codigo', async (req, res) => {
+    const idCliente = req.params.codigo
+
+    const cliente = await db.Cliente.findOne({
+        where : {
+            id : idCliente
+        }
+    })
+
+    res.render('cliente_vcompleta_update', {
+        cliente : cliente,
+    })
+})
+
+app.post('/cliente_vcompleta/modificar', async (req, res) => {
+    const idCliente = req.body.cliente_id
+    const nombre =req.body.cliente_nombre
+    const apellido = req.body.cliente_apellido
+    const dni = req.body.cliente_dni
+    const correo = req.body.cliente_correo
+    const telefono = req.body.cliente_numero
+    const direccion = req.body.cliente_direccion
+    const distrito = req.body.cliente_distrito
+    const provincia = req.body.cliente_provincia
+    const departamento = req.body.cliente_departamento
+    const pep = req.body.cliente_pep
+    const estado = req.body.cliente_estado
+
+    const cliente = await db.Cliente.findOne({
+        where : {
+            id : idCliente
+        }
+    })
+    cliente.nombre = nombre
+    cliente.apellido = apellido
+    cliente.dni = dni
+    cliente.correo = correo
+    cliente.telefono = telefono
+    cliente.direccion = direccion
+    cliente.distrito = distrito
+    cliente.provincia = provincia
+    cliente.departamento = departamento
+    cliente.pep = pep
+    cliente.estado = estado
+
+    await cliente.save()
+
+    res.redirect('/clienteVcompleta')
+
+})
+
+app.get('/cliente_vcompleta/eliminar/:codigo', async (req, res) => {
+    const idCliente = req.params.codigo
+    await db.Cliente.destroy({
+        where : {
+            id : idCliente
+        }
+    })
+    res.redirect('cliente_vcompleta')
 })
 
 app.get('/categorias-juegos', async (req, res) => {

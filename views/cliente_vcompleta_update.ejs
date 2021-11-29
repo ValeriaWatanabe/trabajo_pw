@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TIMBEAR</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    </head>
+    <body class="container">
+        <h2>Actualizar Cliente</h2>
+        <div class="row">
+            <div class="col">
+                <form method="post" action="/cliente_vcompleta/modificar">
+                    <input type="hidden" name="cliente_id" value="<%= cliente.id %>" />
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">Nombres:</label>
+                            <input name="cliente_nombre" 
+                                type="text" 
+                                class="form-control"
+                                value="<%= cliente.nombre %>" />
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Apellidos:</label>
+                            <input name="cliente_apellido" 
+                                type="text" 
+                                class="form-control"
+                                value="<%= cliente.apellido %>" />
+                        </div>
+                        <div class="col">
+                            <label class="form-label">DNI:</label>
+                            <input name="cliente_dni" 
+                                type="text" 
+                                class="form-control"
+                                value="<%= cliente.dni %>" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">Correo:</label>
+                            <input name="cliente_correo" 
+                                type="text" 
+                                class="form-control"
+                                value="<%= cliente.correo %>" />
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Teléfono:</label>
+                            <input name="cliente_numero" 
+                                type="text" 
+                                class="form-control"
+                                value="<%= cliente.numero %>" />
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Dirección:</label>
+                            <input name="cliente_direccion" 
+                                type="text" 
+                                class="form-control"
+                                value="<%= cliente.direccion %>" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">Distrito:</label>
+                            <input name="cliente_distrito" 
+                                type="text" 
+                                class="form-control"
+                                value="<%= cliente.distrito %>" />
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Provincia:</label>
+                            <input name="cliente_provincia" 
+                                type="text" 
+                                class="form-control"
+                                value="<%= cliente.provincia %>" />
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Departamento:</label>
+                            <input name="cliente_departamento" 
+                                type="text" 
+                                class="form-control"
+                                value="<%= cliente.departamento %>" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p>PEP:</p>
+                            <label class="form-label"></label>
+                            <input name="cliente_pep" 
+                                type="checkbox" 
+                                class="form-check-input"
+                                checked="<%= cliente.pep %>"/>
+                                Activo
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Estado:</label>
+                            <input name="cliente_estado" 
+                                type="text" 
+                                class="form-control"
+                                value="<%= cliente.estado %>" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </body>
+</html>

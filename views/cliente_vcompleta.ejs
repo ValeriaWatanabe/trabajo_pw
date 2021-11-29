@@ -40,11 +40,16 @@
                         <td><%= cliente.distrito%></td>
                         <td><%= cliente.provincia%></td>
                         <td><%= cliente.departamento%></td>
-                        <td><%= cliente.pep%></td>
+                        <td><% if(cliente.pep == true) { %>
+                            <%= "Si es PEP"%>
+                            <% }else{ %>
+                            <%= "No es PEP"%>
+                            <%} %>
+                        </td>
                         <td><%= cliente.estado%></td>
                         <td>
-                            <a href="#">Editar</a>
-                            <a href="#">Eliminar</a>
+                            <a href="/cliente_vcompleta/modificar/<%= cliente.id %>">Editar</a>
+                            <a href="/cliente_vcompleta/eliminar/<%= cliente.id %>">Eliminar</a>
                         </td>
                     </tr>
                 <% }) %>
