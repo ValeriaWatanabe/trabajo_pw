@@ -74,7 +74,11 @@ app.get("/lista_partidas/leja_cerca", async (req, res) => {
             ['fecha', 'DESC']
         ]
     });
+    res.render('lista_partidas', {
+        partidas : lista_partidas
+    })
 })
+
 app.get('/historial_apuestas', async (req, res)=>{
     const partidas = await db.Apuesta.findAll({
         
