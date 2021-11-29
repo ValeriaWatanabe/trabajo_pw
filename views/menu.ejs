@@ -3,64 +3,53 @@
     <head>
         <title>TIM-BEAR</title>
         <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     </head>
-    <body class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-brown" style="background-color: #e3f2fd;">
-            <a class="navbar-brand" href="#">APUESTA TOTAL</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">CATEGORÍAS </a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">JUEGOS</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">PARTIDAS</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">HOJA DE APUESTAS</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">HISTORIAL</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">CERRAR SESION</a>
-                </li>
-              </ul>
-          </nav>
-          <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <% var i = 0 %>
-                <% banners.forEach( (banner) => { %>
-                    <% if (i==0){ %>
-                    <div class="carousel-item active">
-                        <a href="<%= banner.url_destino %>"><img src="<%= banner.url %>" class="d-block w-100" alt="banner.nombre" width="1200" height="450"></a>
-                    </div>
-                    <% } else { %>
-                    <div class="carousel-item">
-                      <a href="<%= banner.url_destino %>"><img src="<%= banner.url %>" class="d-block w-100" alt="baner.nombre" width="1000" height="450"></a>
-                    </div>
-                    <% } %>
-                    <% i=i+1 %>
-                <% }) %>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Siguiente</span>
-            </button>
-          </div>
-      </body>
+    <body class="container-fluid">
+    <!-- header -->
+    <div class="bg-light">
+      <nav class="navbar navbar-expand-md navbar-light bg-light border-3 border-bottom">
+              <div class="container-fluid">
+                  <a href="/" class="navbar-brand">
+                      <img src='/imagenes/886423.png' alt="" width="70" height="62" class="d-inline-block align-text-center">
+                      Tim-Bear || Grupo Procrastinador
+                  </a>
+                  <button type="button"
+                      class="navbar-toggler"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#MenuNavegacion">
+                          <span class="navbar-toggler-icon"></span>
+                  </button>
+              </div>
+  
+        <div id="MenuNavegacion" class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+                          <a class="nav-link active" href="/">Inicio</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link active" href="/categorias-juegos">Categorías</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link active" href="/juego_listar">Juegos</a>
+                      </li>
+            <li class="nav-item">
+                          <a class="nav-link" href="/partidasadmin">Partidas</a>
+                      </li>
+            <li class="nav-item">
+                          <a class="nav-link" href="//historial_apuestas">Historial</a>
+                      </li>
+                      </ul>
+                  <ul class="navbar-nav ms-3">
+            <li class="nav-item">
+                          <a class="nav-link text-nowrap" href="iniciosesion">Iniciar sesión</a>
+                      </li>
+                  </ul>
+        </div>
+      </nav>
+    </div>
+    </body>
         
 </html>

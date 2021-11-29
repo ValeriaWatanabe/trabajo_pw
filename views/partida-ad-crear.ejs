@@ -9,15 +9,14 @@
     </head>
     <body class="container">
         <%- include('menu') %>
-
         <h2>Crear Partida</h2>
         <form method="post" action="/partidasadmin/crear">
             <div>
-                <label class="form-label">Juego ID:</label>
-                <select name="partida_juego_id">
+                <label class="form-label">Juego:</label>
+                <select name="partidaJuegoId" class="form-select">
                     <option value="-1">-----Seleccionar Juego-----</option>
-                    <% partida.forEach( (juego)=> { %>
-                        <option value="<%= partida.id%>"><%= partida.id_juego %></option>
+                    <% juego.forEach( (juego)=> { %>
+                            <option value="<%= juego.id %>" ><%= juego.nombre %></option>
                     <% }) %>
                 </select>
             </div>
@@ -27,7 +26,7 @@
             </div>
             <div class="mb-2">
                 <label class="form-label">Hora Inicio:</label>
-                <input name="partida_hora_inicio" type="time" class="form-control" />
+                <input name="partida_hora_inicio" type="date" class="form-control" />
             </div>
             <div class="mb-2">
                 <label class="form-label">Duracion (Minutos):</label>
@@ -35,10 +34,11 @@
             </div>
             <div class="mb-2">
                 <label class="form-label">Estado:</label>
-                <select name="partida_estado">
-                    <option>Pendiente</option>
-                    <option>Iniciado</option>
-                    <option>Finalizado</option>
+                <select name="partida_estado" class="form-select">
+                    <option value="-1">----Seleccionar Estado----</option>
+                    <% partida.forEach( (partida)=> { %>
+                            <option value="<%= partida.estado %>" ><%= partida.estado %></option>
+                    <% }) %>
                 </select>
             </div>
             <div class="mb-2">
@@ -63,14 +63,15 @@
             </div>
             <div class="mb-2">
                 <label class="form-label">Resultado:</label>
-                <select name="partida_resultado">
-                    <option value="-1">-----Seleccionar Resultado-----</option>
-                    <% partida.forEach( (resultado)=> { %>
-                        <option value="<%= partida.id%>"><%= partida.resultado %></option>
+                <select name="partida_resultado" class="form-select">
+                    <option value="-1">----Seleccionar Resultado----</option>
+                    <% partida.forEach( (partida)=> { %>
+                            <option value="<%= partida.resultado %>" ><%= partida.resultado %></option>
                     <% }) %>
                 </select>
             </div>
             <button type="submit" class="btn btn-success">Guardar</button>
         </form>
+        <%- include('footer') %>
     </body>
 </html>

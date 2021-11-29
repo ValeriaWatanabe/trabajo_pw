@@ -12,7 +12,7 @@
         <h2>Actualizar Cliente</h2>
         <div class="row">
             <div class="col">
-                <form method="post" action="/cliente_vsimple/modificar">
+                <form method="post" action="/cliente_vcompleta/modificar">
                     <input type="hidden" name="cliente_id" value="<%= cliente.id %>" />
                     <div class="row">
                         <div class="col">
@@ -29,8 +29,6 @@
                                 class="form-control"
                                 value="<%= cliente.apellido %>" />
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col">
                             <label class="form-label">DNI:</label>
                             <input name="cliente_dni" 
@@ -38,6 +36,8 @@
                                 class="form-control"
                                 value="<%= cliente.dni %>" />
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col">
                             <label class="form-label">Correo:</label>
                             <input name="cliente_correo" 
@@ -51,6 +51,54 @@
                                 type="text" 
                                 class="form-control"
                                 value="<%= cliente.numero %>" />
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Dirección:</label>
+                            <input name="cliente_direccion" 
+                                type="text" 
+                                class="form-control"
+                                value="<%= cliente.direccion %>" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">Distrito:</label>
+                            <input name="cliente_distrito" 
+                                type="text" 
+                                class="form-control"
+                                value="<%= cliente.distrito %>" />
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Provincia:</label>
+                            <input name="cliente_provincia" 
+                                type="text" 
+                                class="form-control"
+                                value="<%= cliente.provincia %>" />
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Departamento:</label>
+                            <input name="cliente_departamento" 
+                                type="text" 
+                                class="form-control"
+                                value="<%= cliente.departamento %>" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p>PEP:</p>
+                            <label class="form-label"></label>
+                            <input name="cliente_pep" 
+                                type="checkbox" 
+                                class="form-check-input"
+                                checked="<%= cliente.pep %>"/>
+                                Activo
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Estado:</label>
+                            <input name="cliente_estado" 
+                                type="text" 
+                                class="form-control"
+                                value="<%= cliente.estado %>" />
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success">Guardar</button>
