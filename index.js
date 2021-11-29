@@ -163,7 +163,7 @@ app.post('/cliente_vsimple/modificar', async (req, res) => {
     const idCliente = req.body.cliente_id
     const nombre =req.body.cliente_nombre
     const apellido = req.body.cliente_apellido
-    const dni = req.body.cliente_id
+    const dni = req.body.cliente_dni
     const correo = req.body.cliente_correo
     const telefono = req.body.cliente_numero
 
