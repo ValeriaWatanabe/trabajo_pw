@@ -211,9 +211,9 @@ app.get('/clienteVcompleta', async (req, res) => {
                 correo: cliente.correo,
                 numero: cliente.numero,
                 direccion: cliente.direccion,
-                /* distritoNombre : distrito.nombre,
-                provinciaNombre: provincia.nombre,
-                departamentoNombre: departamento.nombre, */
+                distrito : cliente.distrito,
+                provincia: cliente.provincia,
+                departamento: cliente.departamento,
                 pep: cliente.pep,
                 estado: cliente.estado
             })
