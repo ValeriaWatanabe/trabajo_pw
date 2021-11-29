@@ -45,6 +45,8 @@ app.get('/', async (req, res)=>{
 
 app.get("/lista_partidas" , async (req,res) =>{
     //const estadopartida = req.Params.estado
+    const factA = req.body.factorA
+    console.log(factA)
     const partidas = await db.Partida.findAll({
 
         where : {
@@ -52,8 +54,22 @@ app.get("/lista_partidas" , async (req,res) =>{
         }
     })
 
+
     res.render('lista_partidas', {partidas : partidas})
 
+})
+
+
+
+app.get("/hojaapuestas", async (req, res)  =>{
+    const banners = await db.Partida.findAll({
+        order : [
+            ['id', 'ASC']
+        ]
+    });
+    res.render('hojaapuestas', {
+        banners : banners
+    })
 })
 
 app.get("/lista_partidas" , async (req,res) =>{
