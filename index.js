@@ -68,6 +68,33 @@ app.get("/lista_partidas" , async (req,res) =>{
 
 })
 
+app.get('/', async (req, res)=>{
+    const partidas = await db.Apuesta.findAll({
+        
+        order :[
+            ['id', 'ASC']
+        ]
+    });
+
+    //console.log(torneos);
+    res.render('historial_apuestas',{
+        partido: partidas,
+    })
+
+})
+
+app.get('/historial_apuestas', async (req, res) => {
+    const partidas = await db.Partida.findAll({
+        order : [
+            ['id', 'ASC']
+        ]
+    });
+    res.render('historial_apuestas', {
+        partido :partidas
+        
+    })
+})
+
 app.get("/registro1", (req, res) => {
     res.render('registro1')
 })
