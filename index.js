@@ -68,7 +68,7 @@ app.get("/lista_partidas" , async (req,res) =>{
 
 })
 
-app.get('/', async (req, res)=>{
+app.get('/historial_apuestas', async (req, res)=>{
     const partidas = await db.Apuesta.findAll({
         
         order :[
@@ -184,6 +184,16 @@ app.post('/cliente_vsimple/modificar', async (req, res) => {
 
 })
 
+app.get('/cliente_vsimple/eliminar/:codigo', async (req, res) => {
+    const idCliente = req.params.codigo
+    await db.Cliente.destroy({
+        where : {
+            id : idCliente
+        }
+    })
+    res.redirect('cliente_vsimple')
+})
+
 app.get('/clienteVcompleta', async (req, res) => {
     const clientes = await db.Cliente.findAll({
         order : [
@@ -193,20 +203,17 @@ app.get('/clienteVcompleta', async (req, res) => {
 
     let nuevaListaClientes = []
         for (let cliente of clientes) {
-            const distrito = await cliente.getid_dist()
-            const provincia = await cliente.getprovincia()
-            const departamento = await cliente.getdepartamento()
             nuevaListaClientes.push({
                 id : cliente.id,
                 nombre : cliente.nombre,
                 apellido: cliente.apellido,
                 dni: cliente.dni,
                 correo: cliente.correo,
-                telefono: cliente.numero,
+                numero: cliente.numero,
                 direccion: cliente.direccion,
-                distritoNombre : distrito.nombre,
+                /* distritoNombre : distrito.nombre,
                 provinciaNombre: provincia.nombre,
-                departamentoNombre: departamento.nombre,
+                departamentoNombre: departamento.nombre, */
                 pep: cliente.pep,
                 estado: cliente.estado
             })
