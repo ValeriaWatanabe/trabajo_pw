@@ -289,7 +289,7 @@ app.get('/categoria/eliminar/:codigo', async (req, res) => {
             id : idCategoria
         }
     })
-    res.redirect('categorias-juegos')
+    res.redirect('/categorias-juegos')
 })
 
 //-----------------------------------------------------------
