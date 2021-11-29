@@ -574,3 +574,14 @@ app.get('/juego_editar', (req, res) => {
 app.listen(PORT, () => {
     console.log('Se ha iniciado el servidor en el puerto ' + PORT)
 })
+
+app.get('/menu', async (req,res) => {
+    const banners = await db.Banners.findAll({
+        order : [
+            ['id', 'ASC']
+        ]
+    });
+    res.render('menu', {
+        banners : banners
+    })
+})

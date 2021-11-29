@@ -7,35 +7,53 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     </head>
-    <body class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-brown" style="background-color: #e3f2fd;">
-            <a class="navbar-brand" href="#">APUESTA TOTAL</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">CATEGORÍAS </a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">JUEGOS</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">PARTIDAS</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">HOJA DE APUESTAS</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">HISTORIAL</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">CERRAR SESION</a>
-                </li>
-              </ul>
-          </nav>
+    <body class="<div class="container-fluid">
+      
+    </div>
+        <!-- header -->
+    <div class="bg-light">
+      <nav class="navbar navbar-expand-md navbar-light bg-light border-3 border-bottom">
+              <div class="container-fluid">
+                  <a href="/" class="navbar-brand">
+                      <img src='/imagenes/886423.png' alt="" width="70" height="62" class="d-inline-block align-text-center">
+                      Tim-Bear
+                  </a>
+                  <button type="button"
+                      class="navbar-toggler"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#MenuNavegacion">
+                          <span class="navbar-toggler-icon"></span>
+                  </button>
+              </div>
+  
+        <div id="MenuNavegacion" class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+                          <a class="nav-link active" href="/">Inicio</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link active" href="/categorias-juegos">Categorías</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link active" href="/juego_listar">Juegos</a>
+                      </li>
+            <li class="nav-item">
+                          <a class="nav-link" href="/partidasadmin">Partidas</a>
+                      </li>
+            <li class="nav-item">
+                          <a class="nav-link" href="//historial_apuestas">Historial</a>
+                      </li>
+                      </ul>
+                  <ul class="navbar-nav ms-3">
+            <li class="nav-item">
+                          <a class="nav-link text-nowrap" href="iniciosesion">Iniciar sesión</a>
+                      </li>
+                  </ul>
+        </div>
+      </nav>
+    </div>
+
+
           <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="2000">
