@@ -11,10 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Juego.belongsTo(models.Categoria, {
+        foreignKey : 'id_categoria'
+      })
     }
   };
   Juego.init({
-    nombre: DataTypes.STRING
+    nombre: DataTypes.STRING,
+    id_categoria: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Juego',
