@@ -17,33 +17,38 @@ app.use(session({
     saveUninitialized : false
 })) // Configuramos servidor para trabajar con sesiones
 
-app.get("/registro1", (req, res) => {
-    res.render('registro1')
+app.get('/', async (req, res)=>{
+    const partidas = await db.Apuesta.findAll({
+        
+        order :[
+            ['id', 'ASC']
+        ]
+    });
+
+    //console.log(torneos);
+    res.render('historial_apuestas',{
+        partido: partidas,
+    })
+
 })
 
-app.get("/registro2", (req, res) => {
-    res.render('registro2')
+
+
+app.get('/historial_apuestas', async (req, res) => {
+    const partidas = await db.Partida.findAll({
+        order : [
+            ['id', 'ASC']
+        ]
+    });
+    res.render('historial_apuestas', {
+        partido :partidas
+        
+    })
 })
 
-app.get("/registro3", (req, res) => {
-    res.render('registro3')
-})
 
-app.get("/registro4", (req, res) => {
-    res.render('registro4')
-})
 
-app.get("/registro5", (req, res) => {
-    res.render('registro5')
-})
 
-app.get("/reg_vali", (req, res) => {
-    res.render('reg_vali')
-})
-
-app.get("/reglas", (req, res) => {
-    res.render('reglas')
-})
 
 app.listen(PORT, () => {
     console.log('Se ha iniciado el servidor en el puerto ' + PORT)
