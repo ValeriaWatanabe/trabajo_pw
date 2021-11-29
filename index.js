@@ -291,7 +291,8 @@ app.get('/categoria/eliminar/:codigo', async (req, res) => {
 app.get('/partidas/admin', async (req, res) => {
     const partidas = await db.Partida.findAll({
         order : [
-            ['fecha','hora_inicio','DESC']
+            ['fecha','DESC']
+            ['hora_inicio','DESC']
         ]
     });
 
@@ -320,7 +321,8 @@ app.get('/partidas/admin', async (req, res) => {
 app.get('/partidas/admcompleta', async (req, res) => {
     const partidas = await db.Partida.findAll({
         order : [
-            ['fecha','hora_inicio','DESC']
+            ['fecha','DESC']
+            ['hora_inicio','DESC']
         ]
     });
 
