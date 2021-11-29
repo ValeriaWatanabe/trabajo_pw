@@ -99,21 +99,27 @@ app.post("/crearRegistro", async (req, res) => {
     const contrasena = req.body.contrasena_cliente
     const c2 = req.body.contrasena_2
 
-    await db.Cliente.create({
-        nombre : nombre,
-        apellido : apellido,
-        dni : dni,
-        correo : correo,
-        numero : numero,
-        departamento : departamento,
-        provincia : provincia,
-        distrito : distrito,
-        direccion : direccion,
-        pep : pep,
-        estado : estado,
-        contrasena : contrasena
-    })
-    res.redirect('/reg_vali')
+    if (c2 == contrasena) {
+        await db.Cliente.create({
+            nombre : nombre,
+            apellido : apellido,
+            dni : dni,
+            correo : correo,
+            numero : numero,
+            departamento : departamento,
+            provincia : provincia,
+            distrito : distrito,
+            direccion : direccion,
+            pep : pep,
+            estado : estado,
+            contrasena : contrasena
+        })
+        res.redirect('/reg_vali')
+    } else {
+        console.log('Contrasena incorrecta')
+        res.redirect('/registro')
+    }
+
 
 })
 
