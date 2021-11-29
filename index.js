@@ -45,15 +45,31 @@ app.get('/', async (req, res)=>{
 
 app.get("/lista_partidas" , async (req,res) =>{
     //const estadopartida = req.Params.estado
+    const factA = req.body.factorA
+    console.log(factA)
     const partidas = await db.Partida.findAll({
 
         where : {
-        estado : "iniciado"
+        estado : "pendiente"
         }
     })
 
+
     res.render('lista_partidas', {partidas : partidas})
 
+})
+
+
+
+app.get("/hojaapuestas", async (req, res)  =>{
+    const banners = await db.Partida.findAll({
+        order : [
+            ['id', 'ASC']
+        ]
+    });
+    res.render('hojaapuestas', {
+        banners : banners
+    })
 })
 
 app.get("/lista_partidas" , async (req,res) =>{
@@ -94,6 +110,40 @@ app.get('/historial_apuestas', async (req, res) => {
         
     })
 })
+
+app.get("/partidos/fecha", async (req,res) => {
+
+    
+    const idApuesta = new Date().getTime()
+
+    console.log("ID", idApuesta)
+
+    const pasadoManana = new Date().getTime() + (86400000 * 2);
+
+
+
+    const tablaPartidos = await db.Partida.findAll({
+
+
+        order : [
+            ['fecha_inicio', 'ASC']
+        ]
+        ,
+        where: {
+            fecha: {
+              $lte: pasadoManana
+            }
+          }
+          
+    })
+
+
+
+    res.render('fecha_partidos', { partidas : tablaPartidos})
+
+})
+
+
 
 app.get("/registro1", (req, res) => {
     res.render('registro1')
