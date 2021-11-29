@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TIMBEAR</title>
+        <meta charset="utf-8" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    </head>
+    <body class="container">
+        <h2>Mantenimiento de Clientes</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>DNI</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% clientes.forEach( (cliente) => { %>
+                    <tr>
+                        <td><%= cliente.id%></td>
+                        <td><%= cliente.nombre%></td>
+                        <td><%= cliente.apellido%></td>
+                        <td><%= cliente.dni%></td>
+                        <td><%= cliente.correo%></td>
+                        <td><%= cliente.numero%></td>
+                        <td>
+                            <a href="#">Editar</a>
+                            <a href="#">Eliminar</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" href="/clienteVcompleta">Cambiar a vista completa</a>
+        <a class="btn btn-primary" href="/categorias-juegos">Ir a categorias juegos</a>
+    </body>
+</html>
