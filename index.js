@@ -74,7 +74,7 @@ app.get("/lista_partidas/leja_cerca", async (req, res) => {
             ['fecha', 'DESC']
         ]
     });
-
+})
 app.get('/historial_apuestas', async (req, res)=>{
     const partidas = await db.Apuesta.findAll({
         
@@ -681,15 +681,4 @@ app.get('/juego_editar', (req, res) => {
 
 app.listen(PORT, () => {
     console.log('Se ha iniciado el servidor en el puerto ' + PORT)
-})
-
-app.get('/menu', async (req,res) => {
-    const banners = await db.Banners.findAll({
-        order : [
-            ['id', 'ASC']
-        ]
-    });
-    res.render('menu', {
-        banners : banners
-    })
 })
