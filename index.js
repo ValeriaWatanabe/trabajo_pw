@@ -17,6 +17,57 @@ app.use(session({
     saveUninitialized : false
 })) // Configuramos servidor para trabajar con sesiones
 
+app.get("/", async (req, res)  =>{
+    const banners = await db.Banners.findAll({
+        order : [
+            ['id', 'ASC']
+        ]
+    });
+    res.render('pagina_inicio', {
+        banners : banners
+    })
+})
+
+
+app.get('/', async (req, res)=>{
+    const partidas = await db.Partida.findAll({
+        order :[
+            ['id', 'ASC']
+        ]
+    });
+
+    //console.log(partidas);
+    res.render('lista_partidas',{
+        partidas: partidas
+    })
+
+})
+
+app.get("/lista_partidas" , async (req,res) =>{
+    //const estadopartida = req.Params.estado
+    const partidas = await db.Partida.findAll({
+
+        where : {
+        estado : "iniciado"
+        }
+    })
+
+    res.render('lista_partidas', {partidas : partidas})
+
+})
+
+app.get("/lista_partidas" , async (req,res) =>{
+    const partidas2 = await db.Partida.findAll({
+
+        where : {
+        categoria : "futbol"
+        }
+    })
+
+    res.render('lista_partidas', {partidas2 : partidas2})
+
+})
+
 app.get("/registro1", (req, res) => {
     res.render('registro1')
 })
@@ -133,27 +184,3 @@ app.listen(PORT, () => {
     console.log('Se ha iniciado el servidor en el puerto ' + PORT)
 })
 
-app.get("/", async (req, res)  =>{
-    const banners = await db.Banners.findAll({
-        order : [
-            ['id', 'ASC']
-        ]
-    });
-    res.render('pagina_inicio', {
-        banners : banners
-    })
-})
-
-app.get('/', async (req, res)=>{
-    const partida = await db.Partida.findAll({
-        order :[
-            ['id', 'ASC']
-        ]
-    });
-
-    //console.log(partidas);
-    res.render('lista_partidas',{
-        partida: partida
-    })
-
-})
