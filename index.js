@@ -75,8 +75,30 @@ app.get("/lista_partidas/leja_cerca", async (req, res) => {
         ]
     });
 
-    res.render('lista_partidas',{
-        partidas : lista_partidas
+app.get('/historial_apuestas', async (req, res)=>{
+    const partidas = await db.Apuesta.findAll({
+        
+        order :[
+            ['id', 'ASC']
+        ]
+    });
+
+    //console.log(torneos);
+    res.render('historial_apuestas',{
+        partido: partidas,
+    })
+
+})
+
+app.get('/historial_apuestas', async (req, res) => {
+    const partidas = await db.Partida.findAll({
+        order : [
+            ['id', 'ASC']
+        ]
+    });
+    res.render('historial_apuestas', {
+        partido :partidas
+        
     })
 })
 
@@ -161,7 +183,7 @@ app.post('/cliente_vsimple/modificar', async (req, res) => {
     const idCliente = req.body.cliente_id
     const nombre =req.body.cliente_nombre
     const apellido = req.body.cliente_apellido
-    const dni = req.body.cliente_id
+    const dni = req.body.cliente_dni
     const correo = req.body.cliente_correo
     const telefono = req.body.cliente_numero
 
@@ -182,6 +204,16 @@ app.post('/cliente_vsimple/modificar', async (req, res) => {
 
 })
 
+app.get('/cliente_vsimple/eliminar/:codigo', async (req, res) => {
+    const idCliente = req.params.codigo
+    await db.Cliente.destroy({
+        where : {
+            id : idCliente
+        }
+    })
+    res.redirect('cliente_vsimple')
+})
+
 app.get('/clienteVcompleta', async (req, res) => {
     const clientes = await db.Cliente.findAll({
         order : [
@@ -191,20 +223,17 @@ app.get('/clienteVcompleta', async (req, res) => {
 
     let nuevaListaClientes = []
         for (let cliente of clientes) {
-            const distrito = await cliente.getid_dist()
-            const provincia = await cliente.getprovincia()
-            const departamento = await cliente.getdepartamento()
             nuevaListaClientes.push({
                 id : cliente.id,
                 nombre : cliente.nombre,
                 apellido: cliente.apellido,
                 dni: cliente.dni,
                 correo: cliente.correo,
-                telefono: cliente.numero,
-                direccion: cliente.direccion,                
-                distritoNombre : distrito.nombre,
-                provinciaNombre: provincia.nombre,
-                departamentoNombre: departamento.nombre,
+                numero: cliente.numero,
+                direccion: cliente.direccion,
+                distrito : cliente.distrito,
+                provincia: cliente.provincia,
+                departamento: cliente.departamento,
                 pep: cliente.pep,
                 estado: cliente.estado
             })
@@ -212,6 +241,67 @@ app.get('/clienteVcompleta', async (req, res) => {
     res.render('cliente_vcompleta', {
         clientes : nuevaListaClientes
     })
+})
+
+app.get('/cliente_vcompleta/modificar/:codigo', async (req, res) => {
+    const idCliente = req.params.codigo
+
+    const cliente = await db.Cliente.findOne({
+        where : {
+            id : idCliente
+        }
+    })
+
+    res.render('cliente_vcompleta_update', {
+        cliente : cliente,
+    })
+})
+
+app.post('/cliente_vcompleta/modificar', async (req, res) => {
+    const idCliente = req.body.cliente_id
+    const nombre =req.body.cliente_nombre
+    const apellido = req.body.cliente_apellido
+    const dni = req.body.cliente_dni
+    const correo = req.body.cliente_correo
+    const telefono = req.body.cliente_numero
+    const direccion = req.body.cliente_direccion
+    const distrito = req.body.cliente_distrito
+    const provincia = req.body.cliente_provincia
+    const departamento = req.body.cliente_departamento
+    const pep = req.body.cliente_pep
+    const estado = req.body.cliente_estado
+
+    const cliente = await db.Cliente.findOne({
+        where : {
+            id : idCliente
+        }
+    })
+    cliente.nombre = nombre
+    cliente.apellido = apellido
+    cliente.dni = dni
+    cliente.correo = correo
+    cliente.telefono = telefono
+    cliente.direccion = direccion
+    cliente.distrito = distrito
+    cliente.provincia = provincia
+    cliente.departamento = departamento
+    cliente.pep = pep
+    cliente.estado = estado
+
+    await cliente.save()
+
+    res.redirect('/clienteVcompleta')
+
+})
+
+app.get('/cliente_vcompleta/eliminar/:codigo', async (req, res) => {
+    const idCliente = req.params.codigo
+    await db.Cliente.destroy({
+        where : {
+            id : idCliente
+        }
+    })
+    res.redirect('cliente_vcompleta')
 })
 
 app.get('/categorias-juegos', async (req, res) => {
@@ -286,28 +376,28 @@ app.get('/categoria/eliminar/:codigo', async (req, res) => {
 //-----------------------------------------------------------
 //---------------------Vista Simple--------------------------
 //-----------------------------------------------------------
-app.get('/partidas/admin', async (req, res) => {
+app.get('/partidasadmin', async (req, res) => {
     const partidas = await db.Partida.findAll({
         order : [
-            ['fecha','hora_inicio','DESC']
+            ['fecha','DESC'],
+            ['hora_inicio','DESC']
         ]
     });
 
-
     let listaSimplePartida = []
-    for (let partida of partidas) {
-        const juego = await partida.getJuego()
-        listaSimplePartida.push({
-            id : partida.id,
-            juego : juego.nombre,
-            fecha : partida.fecha,
-            hora_inicio : partida.hora_inicio,
-            duracion : partida.duracion,
-            estado : partida.estado
-        })
-    }    
+        for (let partida of partidas) {
+            listaSimplePartida.push({
+                id : partida.id,
+                id_juego : partida.id_juego,
+                fecha : partida.fecha,
+                hora_inicio : partida.hora_inicio,
+                duracion : partida.duracion,
+                estado : partida.estado
+            })
+        }
+            
 
-    res.render('partidas-ad-simple', {
+    res.render('partida-ad-simple', {
         partidas : listaSimplePartida
     })
 })
@@ -315,34 +405,34 @@ app.get('/partidas/admin', async (req, res) => {
 //-----------------------------------------------------------
 //---------------------Vista Avanzada------------------------
 //-----------------------------------------------------------
-app.get('/partidas/admcompleta', async (req, res) => {
+app.get('/partidasadmcompleta', async (req, res) => {
     const partidas = await db.Partida.findAll({
         order : [
-            ['fecha','hora_inicio','DESC']
+            ['fecha','DESC'],
+            ['hora_inicio','DESC']
         ]
     });
 
 
     let listaAvPartida = []
-    for (let partida of partidas) {
-        const juego = await partida.getJuego()
-        listaAvPartida.push({
-            id : partida.id,
-            juego : juego.nombre,
-            fecha : partida.fecha,
-            hora_inicio : partida.hora_inicio,
-            duracion : partida.duracion,
-            estado : partida.estado,
-            equipo_A : partida.equipo_A,
-            equipo_B : partida.equipo_B,
-            factor_A : partida.factor_A,
-            factor_X : partida.factor_X,
-            factor_B : partida.factor_B,
-            resultado : partida.resultado
-        })
-    }    
+        for (let partida of partidas) {
+            listaAvPartida.push({
+                id : partida.id,
+                id_juego : partida.id_juego,
+                fecha : partida.fecha,
+                hora_inicio : partida.hora_inicio,
+                duracion : partida.duracion,
+                estado : partida.estado,
+                equipo_A : partida.equipo_A,
+                equipo_B : partida.equipo_B,
+                factor_A : partida.factor_A,
+                factor_X : partida.factor_X,
+                factor_B : partida.factor_B,
+                resultado : partida.resultado
+            })
+        }    
 
-    res.render('partidas-ad-avanzada', {
+    res.render('partida-ad-avanzada', {
         partidas : listaAvPartida
     })
 })
@@ -350,16 +440,17 @@ app.get('/partidas/admcompleta', async (req, res) => {
 //-----------------------------------------------------------
 //---------------------CREAR PARTIDA-------------------------
 //-----------------------------------------------------------
-app.get('/partidas/admin/crear', async (req, res) => {
+app.get('/partidasadmin/crear', async (req, res) => {
+    const juego = await db.Juego.findAll()
     const partida = await db.Partida.findAll()
 
     res.render('partida-ad-crear',{
+        juego : juego,
         partida : partida
     })
 })
 
-app.post('/partida/admin/crear', async (req, res) => {
-    const partidaJuegoId = req.body.partida_juego_id
+app.post('/partidasadmin/crear', async (req, res) => {
     const partidaFecha = req.body.partida_fecha
     const partidaHoraInicio = req.body.partida_hora_inicio
     const partidaDuracion = req.body.partida_duracion
@@ -370,10 +461,10 @@ app.post('/partida/admin/crear', async (req, res) => {
     const partidaFX = req.body.partida_fx
     const partidaFB = req.body.partida_fb
     const partidaResultado = req.body.partida_resultado
+    const partidaJuegoId = req.body.partidaJuegoId
 
 
     await db.Partida.create({
-        id_juego : partidaJuegoId,
         fecha : partidaFecha,
         hora_inicio : partidaHoraInicio,
         duracion : partidaDuracion,
@@ -383,16 +474,18 @@ app.post('/partida/admin/crear', async (req, res) => {
         factor_A : partidaFA,
         factor_X : partidaFX,
         factor_B : partidaFB,
-        resultado : partidaResultado
+        resultado : partidaResultado,
+        id_juego : partidaJuegoId,
+        id_categoria : 1
     })
 
-    res.redirect('/partidas/admin')
+    res.redirect('/partidasadmin')
 })
 
 //-----------------------------------------------------------
-//--------------------EDITAR PARTIDA-------------------------
+//--------------------EDITAR PARTIDA-------------------------          
 //-----------------------------------------------------------
-app.get('/partidas/admin/editar/:codigo', async (req, res) => {
+app.get('/partidasadmin/editar/:codigo', async (req, res) => {
     const id_partida = req.params.codigo
 
     const partida = await db.Partida.findOne({
@@ -400,59 +493,78 @@ app.get('/partidas/admin/editar/:codigo', async (req, res) => {
             id : id_partida
         }
     })
+
+    const juego = await db.Juego.findAll()
+
     res.render('partida-ad-editar', {
-        partida : partida
+        partida : partida,
+        juego : juego
     })
 })
 
-app.post('/partidas/editar', async (req, res) => {
-    const partidaJuegoId = req.body.partida_juego_id
+app.post('/partidasadmin/editar', async (req, res) => {
     const partidaFecha = req.body.partida_fecha
     const partidaHoraInicio = req.body.partida_hora_inicio
     const partidaDuracion = req.body.partida_duracion
-    const partidaEstado = req.body.partida_estado
+    const partidaFA = req.body.partida_fa
+    const partidaFB = req.body.partida_fb
+    const partidaFX = req.body.partida_fx
     const partidaEA = req.body.partida_ea
     const partidaEB = req.body.partida_eb
-    const partidaFA = req.body.partida_fa
-    const partidaFX = req.body.partida_fx
-    const partidaFB = req.body.partida_fb
+    const partidaEstado = req.body.partida_estado
     const partidaResultado = req.body.partida_resultado
+    const partidaJuegoId = req.body.partidaJuegoId
 
     const partida = await db.Partida.findOne({
         where : {
-            id : id_partida
+            id : partidaJuegoId
         }
     })
-    partida.id_juego = partidaJuegoId
+    
+
     partida.fecha = partidaFecha
     partida.hora_inicio = partidaHoraInicio
     partida.duracion = partidaDuracion
-    partida.estado = partidaEstado
-    partida.equipo_A = partidaEA
-    partida.equipo_B = partidaEB
     partida.factor_A = partidaFA
     partida.factor_X = partidaFX
     partida.factor_B = partidaFB
+    partida.equipo_A = partidaEA
+    partida.equipo_B = partidaEB
+    partida.estado = partidaEstado
     partida.resultado = partidaResultado
+    partida.id_juego = partidaJuegoId
 
     await partida.save()
 
-    res.redirect('/partidas/admin')
+    res.redirect('/partidasadmin')
 
 })
 
 //-----------------------------------------------------------
 //--------------------ELIMINAR PARTIDA-----------------------
 //-----------------------------------------------------------
-app.get('/partidas/admin/eliminar/:codigo', async (req, res) => {
-    const id_partida = req.params.codigo
+app.get('/partidasadmin/eliminar/:codigo', async (req, res) => {
+    const idPartida = req.params.codigo
     await db.Partida.destroy({
         where : {
-            id : id_partida
+            id : idPartida
         }
     })
+    res.redirect('/partidasadmin')
+})
 
-    res.redirect('/partidas/admin')
+//-----------------------------------------------------------
+//----------------------MENU---------------------------------
+//-----------------------------------------------------------
+app.get('/menu', async (req,res) => {
+    const banners = await db.Banners.findAll({
+        order : [
+            ['id', 'ASC']
+        ]
+    });
+    res.render('menu', {
+        banners : banners
+    })
 })
 
 app.get('/banners', async (req, res) => {
@@ -534,7 +646,50 @@ app.get('/banner/eliminar/:codigo', async (req, res) => {
     res.redirect('/banners')
 })
 
+app.get('/iniciosesion', (req, res) => {
+    res.render('iniciosesion')
+})
+
+app.post('/iniciosesion',(req,res) => {
+    console.log("data_form",req.body)
+    res.render('respuesta_iniciosesion', {
+        correo: req.body.frm_correo,
+        contraseña: req.body.frm_contraseña
+    })
+})
+
+
+app.get('/nosotros', (req, res) => {
+    res.render('nosotros')
+})
+
+app.get('/terminos', (req, res) => {
+    res.render('terminos')
+})
+
+app.get('/juego_listar', (req, res) => {
+    res.render('juego_listar')
+})
+
+app.get('/juego_crear', (req, res) => {
+    res.render('juego_crear')
+})
+
+app.get('/juego_editar', (req, res) => {
+    res.render('juego_editar')
+})
+
 app.listen(PORT, () => {
     console.log('Se ha iniciado el servidor en el puerto ' + PORT)
 })
 
+app.get('/menu', async (req,res) => {
+    const banners = await db.Banners.findAll({
+        order : [
+            ['id', 'ASC']
+        ]
+    });
+    res.render('menu', {
+        banners : banners
+    })
+})
