@@ -134,15 +134,15 @@ module.exports = {
       dni : "05463260",
       correo : "manuel@gmail.com",
       numero : "984163051",
+      departamento : 'Lima',
+      provincia : 'Lima',
+      distrito : 'San Borja',
       direccion : "Las Magnolias 123",
       pep : true,
       estado : "Validado",
       contrasena : "barryallen",
       createdAt : new Date(), 
-      updatedAt : new Date(),
-      id_dep : 1,
-      id_prov : 1,
-      id_dist : 1
+      updatedAt : new Date()
     },
     {
       nombre : "José Carlos",
@@ -150,15 +150,15 @@ module.exports = {
       dni : "70516138",
       correo : "jose@gmail.com",
       numero : "983491081",
+      departamento : 'Lima',
+      provincia : 'Lima',
+      distrito : 'Jesús María',
       direccion : "Pirandello 150",
       pep : true,
       estado : "Validado",
       contrasena : "bobesponja",
       createdAt : new Date(), 
-      updatedAt : new Date(),
-      id_dep : 1,
-      id_prov : 1,
-      id_dist : 1
+      updatedAt : new Date()
     },
     {
       nombre : "Andrea Jimena",
@@ -166,15 +166,15 @@ module.exports = {
       dni : "62058432",
       correo : "andrea@gmail.com",
       numero : "931540298",
+      departamento : 'Lima',
+      provincia : 'Lima',
+      distrito : 'San Borja',
       direccion : "Zorritos 1200",
       pep : true,
       estado : "Validado",
       contrasena : "mariposa",
       createdAt : new Date(), 
-      updatedAt : new Date(),
-      id_dep : 1,
-      id_prov : 1,
-      id_dist : 1
+      updatedAt : new Date()
     }
   ])
   

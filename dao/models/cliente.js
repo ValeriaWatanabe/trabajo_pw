@@ -11,18 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Cliente.belongsTo(models.Departamento, {
-        foreignKey : 'id_dep'
-      })
-
-      Cliente.belongsTo(models.Provincia, {
-        foreignKey : 'id_prov'
-      })
-
-      Cliente.belongsTo(models.Distrito, {
-        foreignKey : 'id_dist'
-      })
-    }
+      }
   };
   Cliente.init({
     nombre: DataTypes.STRING,
@@ -30,13 +19,13 @@ module.exports = (sequelize, DataTypes) => {
     dni: DataTypes.STRING,
     correo: DataTypes.STRING,
     numero: DataTypes.STRING,
+    departamento: DataTypes.STRING,
+    provincia: DataTypes.STRING,
+    distrito: DataTypes.STRING,
     direccion: DataTypes.STRING,
     pep: DataTypes.BOOLEAN,
     estado: DataTypes.STRING,
-    contrasena: DataTypes.STRING,
-    id_dep: DataTypes.INTEGER,
-    id_prov: DataTypes.INTEGER,
-    id_dist: DataTypes.INTEGER,
+    contrasena: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Cliente',
