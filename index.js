@@ -75,7 +75,7 @@ app.get('/clienteVcompleta', async (req, res) => {
                 dni: cliente.dni,
                 correo: cliente.correo,
                 telefono: cliente.numero,
-                direccion: cliente.direccion,                
+                direccion: cliente.direccion,
                 distritoNombre : distrito.nombre,
                 provinciaNombre: provincia.nombre,
                 departamentoNombre: departamento.nombre,
@@ -156,4 +156,37 @@ app.get('/', async (req, res)=>{
         partida: partida
     })
 
+})
+
+app.get('/iniciosesion', (req, res) => {
+    res.render('iniciosesion')
+})
+
+app.post('/iniciosesion',(req,res) => {
+    console.log("data_form",req.body)
+    res.render('respuesta_iniciosesion', {
+        correo: req.body.frm_correo,
+        contraseña: req.body.frm_contraseña
+    })
+})
+
+
+app.get('/nosotros', (req, res) => {
+    res.render('nosotros')
+})
+
+app.get('/terminos', (req, res) => {
+    res.render('terminos')
+})
+
+app.get('/juego_listar', (req, res) => {
+    res.render('juego_listar')
+})
+
+app.get('/juego_crear', (req, res) => {
+    res.render('juego_crear')
+})
+
+app.get('/juego_editar', (req, res) => {
+    res.render('juego_editar')
 })
