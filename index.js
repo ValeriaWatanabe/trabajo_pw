@@ -160,7 +160,7 @@ app.get("/reglas", (req, res) => {
 app.get('/clienteVsimple', async (req, res) => {
     const clientes = await db.Cliente.findAll({
         order : [
-            ['id', 'DESC']
+            ['id', 'ASC']
         ]
     });
 
@@ -221,7 +221,7 @@ app.get('/cliente_vsimple/eliminar/:codigo', async (req, res) => {
 app.get('/clienteVcompleta', async (req, res) => {
     const clientes = await db.Cliente.findAll({
         order : [
-            ['id', 'DESC']
+            ['id', 'ASC']
         ]
     });
 
