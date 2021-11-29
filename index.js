@@ -288,7 +288,7 @@ app.get('/categoria/eliminar/:codigo', async (req, res) => {
 //-----------------------------------------------------------
 //---------------------Vista Simple--------------------------
 //-----------------------------------------------------------
-app.get('/partidas/admin', async (req, res) => {
+app.get('/partidasadmin', async (req, res) => {
     const partidas = await db.Partida.findAll({
         order : [
             ['fecha','DESC']
@@ -318,7 +318,7 @@ app.get('/partidas/admin', async (req, res) => {
 //-----------------------------------------------------------
 //---------------------Vista Avanzada------------------------
 //-----------------------------------------------------------
-app.get('/partidas/admcompleta', async (req, res) => {
+app.get('/partidasadmcompleta', async (req, res) => {
     const partidas = await db.Partida.findAll({
         order : [
             ['fecha','DESC']
@@ -354,7 +354,7 @@ app.get('/partidas/admcompleta', async (req, res) => {
 //-----------------------------------------------------------
 //---------------------CREAR PARTIDA-------------------------
 //-----------------------------------------------------------
-app.get('/partidas/admin/crear', async (req, res) => {
+app.get('/partidasadmin/crear', async (req, res) => {
     const partida = await db.Partida.findAll()
 
     res.render('partida-ad-crear',{
@@ -362,7 +362,7 @@ app.get('/partidas/admin/crear', async (req, res) => {
     })
 })
 
-app.post('/partida/admin/crear', async (req, res) => {
+app.post('/partidaadmin/crear', async (req, res) => {
     const partidaJuegoId = req.body.partida_juego_id
     const partidaFecha = req.body.partida_fecha
     const partidaHoraInicio = req.body.partida_hora_inicio
@@ -390,13 +390,13 @@ app.post('/partida/admin/crear', async (req, res) => {
         resultado : partidaResultado
     })
 
-    res.redirect('/partidas/admin')
+    res.redirect('/partidasadmin')
 })
 
 //-----------------------------------------------------------
 //--------------------EDITAR PARTIDA-------------------------
 //-----------------------------------------------------------
-app.get('/partidas/admin/editar/:codigo', async (req, res) => {
+app.get('/partidasadmin/editar/:codigo', async (req, res) => {
     const id_partida = req.params.codigo
 
     const partida = await db.Partida.findOne({
@@ -409,7 +409,7 @@ app.get('/partidas/admin/editar/:codigo', async (req, res) => {
     })
 })
 
-app.post('/partidas/editar', async (req, res) => {
+app.post('/partidasadmin/editar', async (req, res) => {
     const partidaJuegoId = req.body.partida_juego_id
     const partidaFecha = req.body.partida_fecha
     const partidaHoraInicio = req.body.partida_hora_inicio
@@ -441,14 +441,14 @@ app.post('/partidas/editar', async (req, res) => {
 
     await partida.save()
 
-    res.redirect('/partidas/admin')
+    res.redirect('/partidasadmin')
 
 })
 
 //-----------------------------------------------------------
 //--------------------ELIMINAR PARTIDA-----------------------
 //-----------------------------------------------------------
-app.get('/partidas/admin/eliminar/:codigo', async (req, res) => {
+app.get('/partidasadmin/eliminar/:codigo', async (req, res) => {
     const id_partida = req.params.codigo
     await db.Partida.destroy({
         where : {
@@ -456,7 +456,7 @@ app.get('/partidas/admin/eliminar/:codigo', async (req, res) => {
         }
     })
 
-    res.redirect('/partidas/admin')
+    res.redirect('/partidasadmin')
 })
 
 app.get('/banners', async (req, res) => {
