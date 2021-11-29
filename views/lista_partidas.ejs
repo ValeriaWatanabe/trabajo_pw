@@ -18,9 +18,15 @@
         <h3 class="display-2 proximos"><b>Lista de Partidas</b></h3>
         <%- include('filtra_estado_partidas') %>
 
+
         <%- include('filtrar_fecha') %>
 
+
         <%- include('filtra_categoria_partidas') %>
+
+        <div class="mt-3">
+            <a class="btn btn-danger fw-bold" href="/lista_partidas/leja_cerca">Ordernar por lejanía</a>
+        </div>
 
         <div class="row mt-4"> 
         </div>
@@ -58,7 +64,7 @@
                                                 <td><%=partida.factor_B%> </td>
                                                 
                                             </tr>
-                                            <% }) %>
+                                    <% }) %>
                                 </tbody>
                 
                 

@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Apuesta.belongsTo(models.Partida, {
+        foreignKey : 'id_partida'
+      })
     }
   };
   Apuesta.init({
@@ -18,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     numero: DataTypes.INTEGER,
     resultado_Apostado: DataTypes.STRING,
     monto: DataTypes.FLOAT,
-    estado: DataTypes.STRING
+    estado: DataTypes.STRING,
+    id_partida: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Apuesta',
