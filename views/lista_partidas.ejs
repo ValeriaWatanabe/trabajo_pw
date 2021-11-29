@@ -16,9 +16,9 @@
         
         <%- include('menu') %>
         <h3 class="display-2 proximos"><b>Lista de Partidas</b></h3>
-        <%- include('filtra_estado_partidas') %>
-
-
+       <%- include('filtra_estado_partidas') %> 
+        
+        
         <%- include('filtrar_fecha') %>
 
 
@@ -53,35 +53,37 @@
                                 </thead>
                                 <tbody class="text-center">
                                     <% partidas.forEach((partida) => { %>
-                                            <tr>
-                                                <td><%=partida.id_juego%></td>
-                                                <td><%=partida.fecha.toISOString().substring(0,10)%> </td>
-                                                <td><%=partida.hora_inicio%> </td>
-                                                <td><%=partida.equipo_A%> </td>
-                                                <td><%=partida.equipo_B%> </td>
-                                                <td><%=partida.factor_A%> </td>
-                                                <td><%=partida.factor_X%> </td>
-                                                <td><%=partida.factor_B%> </td>
-                                                
-                                            </tr>
+                                    
+                                        <tr>
+                                            <td><%=partida.id_juego%></td>
+                                            <td><%=partida.fecha.toISOString().substring(0,10)%> </td>
+                                            <td><%=partida.hora_inicio%> </td>
+                                            <td><%=partida.equipo_A%> </td>
+                                            <td><%=partida.equipo_B%> </td>
+                                            <td><button type = "boton"  value = "<%=partida.factor_A%>" name = "factorA"><%=partida.factor_A%> </button></td>
+                                            <td><button><%=partida.factor_X%> </button></td>
+                                            <td><button><%=partida.factor_B%> </button></td>
+                                            
+                                        </tr>
+                                            
                                     <% }) %>
                                 </tbody>
                 
                 
                                 
                             </table>
+                            <%- include('hojaapuestas') %>
                             
                         </div>
         
                     </div>
-    
+                    
     
                 </div>
                 
     
             </div>
-
+          <%- include('footer') %>
         </div>
-        <%- include('footer') %>
     </body>
 </html>
