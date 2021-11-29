@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-    }
+      }
   };
   Cliente.init({
     nombre: DataTypes.STRING,
@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     dni: DataTypes.STRING,
     correo: DataTypes.STRING,
     numero: DataTypes.STRING,
+    departamento: DataTypes.STRING,
+    provincia: DataTypes.STRING,
+    distrito: DataTypes.STRING,
     direccion: DataTypes.STRING,
     pep: DataTypes.BOOLEAN,
     estado: DataTypes.STRING,

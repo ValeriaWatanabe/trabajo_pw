@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>TIMBEAR</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
@@ -36,14 +37,19 @@
                         <td><%= cliente.correo%></td>
                         <td><%= cliente.numero%></td>
                         <td><%= cliente.direccion%></td>
-                        <td><%= cliente.id_dep%></td>
-                        <td><%= cliente.id_prov%></td>
-                        <td><%= cliente.id_dep%></td>
-                        <td><%= cliente.pep%></td>
+                        <td><%= cliente.distrito%></td>
+                        <td><%= cliente.provincia%></td>
+                        <td><%= cliente.departamento%></td>
+                        <td><% if(cliente.pep == true) { %>
+                            <%= "Si es PEP"%>
+                            <% }else{ %>
+                            <%= "No es PEP"%>
+                            <%} %>
+                        </td>
                         <td><%= cliente.estado%></td>
                         <td>
-                            <a href="#">Editar</a>
-                            <a href="#">Eliminar</a>
+                            <a href="/cliente_vcompleta/modificar/<%= cliente.id %>">Editar</a>
+                            <a href="/cliente_vcompleta/eliminar/<%= cliente.id %>">Eliminar</a>
                         </td>
                     </tr>
                 <% }) %>

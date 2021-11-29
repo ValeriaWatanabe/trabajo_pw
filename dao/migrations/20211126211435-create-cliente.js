@@ -23,6 +23,15 @@ module.exports = {
       numero: {
         type: Sequelize.STRING
       },
+      departamento: {
+        type: Sequelize.STRING
+      },
+      provincia: {
+        type: Sequelize.STRING
+      },
+      distrito: {
+        type: Sequelize.STRING
+      },
       direccion: {
         type: Sequelize.STRING
       },

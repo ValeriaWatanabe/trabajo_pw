@@ -8,70 +8,62 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     </head>
     <body class="container">
-        <%- include('menu') %>
+ 
 
         <h2>Editar Partida</h2>
         <div class="col">
             <form method="post" action="/partidasadmin/editar">
-                <label class="form-label">Juego ID:</label>
-                <select>    
-                    <option value="-1">-----Seleccionar Juego-----</option>
-                    <% partida.forEach( (juego)=> { %>
-                        <option value="<%= partida.id%>"><%= partida.id_juego %></option>
-                    <% }) %>
-                </select>
-            </div>
-            <div class="mb-2">
-                <label class="form-label">Fecha:</label>
-                <input name="partida_fecha" type="date" class="form-control" />
-            </div>
-            <div class="mb-2">
-                <label class="form-label">Hora Inicio:</label>
-                <input name="partida_hora_inicio" type="time" class="form-control" />
-            </div>
-            <div class="mb-2">
-                <label class="form-label">Duracion (Minutos):</label>
-                <input name="partida_duracion" type="integer" class="form-control" />
-            </div>
-            <div class="mb-2">
-                <label class="form-label">Estado:</label>
-                <select name="partida_estado">
-                    <option>Pendiente</option>
-                    <option>Iniciado</option>
-                    <option>Finalizado</option>
-                </select>
-            </div>
-            <div class="mb-2">
-                <label class="form-label">Equipo Local:</label>
-                <input name="partida_ea" type="text" class="form-control" />
-            </div>
-            <div class="mb-2">
-                <label class="form-label">Equipo Visita:</label>
-                <input name="partida_eb" type="text" class="form-control" />
-            </div>
-            <div class="mb-2">
-                <label class="form-label">Factor Local:</label>
-                <input name="partida_fa" type="float" class="form-control" />
-            </div>
-            <div class="mb-2">
-                <label class="form-label">Factor Empate:</label>
-                <input name="partida_fx" type="float" class="form-control" />
-            </div>
-            <div class="mb-2">
-                <label class="form-label">Factor Visita:</label>
-                <input name="partida_fb" type="float" class="form-control" />
-            </div>
-            <div class="mb-2">
-                <label class="form-label">Resultado:</label>
-                <select name="partida_resultado">
-                    <option value="-1">-----Seleccionar Resultado-----</option>
-                    <% partida.forEach( (resultado)=> { %>
-                        <option value="<%= partida.id%>"><%= partida.resultado %></option>
-                    <% }) %>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-success">Guardar</button>
-        </form>
+                <div>
+                    <label class="form-label">Juego ID:</label>
+                    <select name="partidaJuegoId" class="form-select">
+                        <option value="-1">-----Seleccionar Juego-----</option>
+                        <% juego.forEach( (juego)=> { %>
+                                <option selected value="<%= juego.id %>" ><%= juego.nombre %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Fecha:</label>
+                    <input name="partida_fecha" type="date" class="form-control" />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Hora Inicio:</label>
+                    <input name="partida_hora_inicio" type="date" class="form-control" />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Duracion (Minutos):</label>
+                    <input name="partida_duracion" type="integer" class="form-control" />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Estado:</label>
+                    <input name="partida_estado" type="type" class="form-control">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Equipo Local:</label>
+                    <input name="partida_ea" type="text" class="form-control" />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Equipo Visita:</label>
+                    <input name="partida_eb" type="text" class="form-control" />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Factor Local:</label>
+                    <input name="partida_fa" type="float" class="form-control" />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Factor Empate:</label>
+                    <input name="partida_fx" type="float" class="form-control" />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Factor Visita:</label>
+                    <input name="partida_fb" type="float" class="form-control" />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Resultado:</label>
+                    <input name="partida_resultado" type="type" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </form>
         </div>
     </body>
 </html>
