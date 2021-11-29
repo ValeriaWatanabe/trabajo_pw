@@ -3,7 +3,7 @@
     <head>
         <title>TIM-BEAR</title>
         <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     </head>
@@ -37,16 +37,16 @@
               </ul>
           </nav>
           <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
+              <div class="carousel-inner">
                 <% var i = 0 %>
                 <% banners.forEach( (banner) => { %>
                     <% if (i==0){ %>
                     <div class="carousel-item active">
-                        <a href="<%= banner.url_destino %>"><img src="<%= banner.url %>" class="d-block w-100" alt="banner.nombre" width="1200" height="450"></a>
+                        <a href="<%= banner.url_destino %>"><img src="<%= banner.url %>" class="d-block w-100" alt="banner.nombre" width="1200" height="450"/></a>
                     </div>
                     <% } else { %>
                     <div class="carousel-item">
-                      <a href="<%= banner.url_destino %>"><img src="<%= banner.url %>" class="d-block w-100" alt="baner.nombre" width="1000" height="450"></a>
+                        <a href="<%= banner.url_destino %>"><img src="<%= banner.url %>" class="d-block w-100" alt="baner.nombre" width="1000" height="450"></a>
                     </div>
                     <% } %>
                     <% i=i+1 %>
