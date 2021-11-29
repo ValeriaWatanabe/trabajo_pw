@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TIMBEAR</title>
+        <title>TIM-BEAR</title>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     </head>
     <body class="container">
+
         <%- include('menu') %>
-        <h2>Lista de Juegos</h2>
-        <a class="btn btn-success" href="/juego_crear">Nuevo</a>
+        <h2>Administrar Juegos</h2>
+        <a class="btn btn-success" href="/juego_listar/juego_crear">Crear</a>
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nombre del Juego</th>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
                     <th>Acciones</th>
+
                 </tr>
             </thead>
             <tbody>
-                <% Juego.forEach( (Juego) => { %>
+                <% juegos.forEach( (juego) => { %>
                     <tr>
-                        <td><%= Juego.id%></td>
-                        <td><%= Juego.nombre%></td>
+                        <td><%= juego.id %></td>
+                        <td><%= juego.nombre %></td>
+                        <td><%= juego.id_categoria%></td>
                         <td>
-                            <a href="/categoria/modificar/<%= juego.id %>">Editar</a>
-                            <a href="/categoria/eliminar/<%= JUego.id %>">Eliminar</a>
+                            <a href="/juego_listar/juego_editar/<%= juego.id %>" >Editar</a>
+                            <a href="/juego_listar/juego_eliminar/<%= juego.id %>" >Eliminar</a>
                         </td>
                     </tr>
                 <% }) %>
             </tbody>
         </table>
-        <a class="btn btn-primary" href="/clienteVsimple">Ir a la vista simple de clientes</a>
-        <a class="btn btn-primary" href="/banners">Ir a la vista banners</a>
+        <%- include('footer') %>
     </body>
 </html>

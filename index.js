@@ -654,11 +654,27 @@ app.get('/iniciosesion', (req, res) => {
     res.render('iniciosesion')
 })
 
+
 app.post('/iniciosesion',(req,res) => {
-    console.log("data_form",req.body)
-    res.render('respuesta_iniciosesion', {
-        correo: req.body.frm_correo,
-        contraseña: req.body.frm_contraseña
+    const frm_correo = req.body.frm_correo
+    const frm_contraseña = req.body.frm_contraseña
+
+    if(frm_correo == "admin@gmail.com" && frm_contraseña == "123") {
+        res.redirect("/logeado")
+    }else {
+        res.redirect('/iniciosesion')
+    }
+})
+
+
+app.get("/logeado", async (req, res)  =>{
+    const banners = await db.Banners.findAll({
+        order : [
+            ['id', 'ASC']
+        ]
+    });
+    res.render('logeado', {
+        banners : banners
     })
 })
 
@@ -671,18 +687,82 @@ app.get('/terminos', (req, res) => {
     res.render('terminos')
 })
 
-app.get('/juego_listar', (req, res) => {
-    res.render('juego_listar')
+app.get('/juego_listar', async (req, res) => {
+    const juegos = await db.Juego.findAll({
+        order : [
+            ['id', 'ASC']
+        ]
+    });
+
+    res.render('juego_listar', {
+        juegos : juegos
+    })
 })
 
-app.get('/juego_crear', (req, res) => {
+app.get('/juego_listar/juego_crear', (req, res) => {
     res.render('juego_crear')
 })
 
-app.get('/juego_editar', (req, res) => {
-    res.render('juego_editar')
+app.post('/juego_listar/juego_crear', async (req, res) => {
+    const juegoNombre = req.body.juego_nombre
+    const juegoCategoria_id = req.body.juego_categoria_id
+   
+    await db.Juego.create({
+        nombre : juegoNombre,
+        id_categoria : juegoCategoria_id,
+    })
+    res.redirect('/juego_listar')
 })
+
+
+app.get('/juego_listar/juego_editar/:codigo', async (req, res) => {
+    const idJuego = req.params.codigo
+
+    const juego = await db.Juego.findOne({
+        where : {
+            id : idJuego
+        }
+    })
+
+    res.render('juego_editar', {
+        juego : juego,
+    })
+})
+
+app.post('/juego_listar/juego_editar', async (req, res) => {
+    const idJuego = req.body.juego_id
+    const nombre = req.body.juego_nombre
+    const categoria = req.body.juego_id_categoria
+
+    const juego = await db.Juego.findOne({
+        where : {
+            id : idJuego
+        }
+    })
+    juego.nombre = nombre
+    juego.id_categoria = categoria
+    
+
+    await juego.save()
+
+    res.redirect('/juego_listar')
+
+})
+
+app.get('/juego_listar/juego_eliminar/:codigo', async (req, res) => {
+    const juego = req.params.codigo
+    await db.Juego.destroy({
+        where : {
+            id : juego
+        }
+    })
+    res.redirect('/juego_listar')
+})
+
+
 
 app.listen(PORT, () => {
     console.log('Se ha iniciado el servidor en el puerto ' + PORT)
 })
+
+
