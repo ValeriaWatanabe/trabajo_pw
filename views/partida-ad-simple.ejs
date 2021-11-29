@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TIM-BEAR</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    </head>
+    <body class="container">
+        <%- include('menu') %>
+
+        <h2>Administrar Partidas</h2>
+        <a class="btn btn-success" href="/partidas/admin/crear">Crear</a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Juego</th>
+                    <th>Fecha</th>
+                    <th>Hora Inicio</th>
+                    <th>Duracion</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% partidas.forEach( (partida) => { %>
+                    <tr>
+                        <td><%= partida.id %></td>
+                        <td><%= juego.nombre %></td> 
+                        <td><%= partida.fecha.toISOString().substring(0,10) %></td>
+                        <td><%= partida.hora_inicio.toTimeString() %></td>
+                        <td><%= partida.duracion %></td>
+                        <td><%= partida.estado %></td>
+                        <td>
+                            <a href="/partidas/admin/editar/<%= partida.id %>" >Editar</a>
+                            <a href="/partidas/admin/eliminar/<%= partida.id %>" >Eliminar</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" href="/partidas/admcompleta">Vista completa</a>
+        <%- include('footer') %>
+    </body>
+</html>

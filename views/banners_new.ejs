@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TIMBEAR</title>
+        <meta charset="utf-8" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    </head>
+    <body class="container">
+        <h2>Agregar Banner</h2>
+        <form method="post" action="/banner/new">
+            <div class="row">
+                <div class="col">
+                    <label class="form-label">Nombre:</label>
+                    <input name="banner_nombre" type="text" class="form-control" />
+                </div>
+                <div class="col">
+                    <label class="form-label">URL Destino:</label>
+                    <input name="banner_url_destino" type="text" class="form-control" />
+                </div>
+                <div class="col">
+                    <p>Estado</p>
+                    <label class="form-label"></label>
+                        <input name="banner_estado" type="checkbox"  class="form-check-input">
+                        Activo
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="form-label">URL:</label>
+                    <input name="banner_url" type="text" class="form-control" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Guardar</button>
+        </form>
+    </body>
+</html>
