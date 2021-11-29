@@ -11,7 +11,7 @@
         <%- include('menu') %>
 
         <h2>Administrar Partidas</h2>
-        <a class="btn btn-success" href="/partidas/admin">Administrar Partidas</a>
+        <a class="btn btn-success" href="/partidas/admin/crear">Crear</a>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -24,7 +24,7 @@
                     <th>Equipo A</th>
                     <th>Equipo B</th>
                     <th>Factor A</th>
-                    <th>Factor X</th>
+                    <th>X</th>
                     <th>Factor B</th>
                     <th>Resultado</th>
                 </tr>
@@ -33,23 +33,9 @@
                 <% partidas.forEach( (partida) => { %>
                     <tr>
                         <td><%= partida.id %></td>
-                        <td>
-                            <%= 
-                            <select id="Juego">
-
-                                <%
-                                var options = [ "Futbol", "Baloncesto", "Hockey"];
-                                for ( var i = 0; i < options.length; i++ )
-                                {
-                                    var jselected = ( config[0].juego == i ) ? "selected" : "";
-                                    %><option value="<%=options[ i ] %>" <%=jselected %>><%=i %></option><%
-                                }
-                                %>
-                            </select> 
-                            %>
-                        </td>
-                        <td><%= parrtida.fecha %></td>
-                        <td><%= partida.hora_inicio %></td>
+                        <td><%= partida.juegoNombre %></td> 
+                        <td><%= partida.fecha.toISOString().substring(0,10) %></td>
+                        <td><%= partida.hora_inicio.toTimeString() %></td>
                         <td><%= partida.duracion %></td>
                         <td><%= partida.estado %></td>
                         <td><%= partida.equipo_A %></td>
@@ -57,31 +43,16 @@
                         <td><%= partida.factor_A %></td>
                         <td><%= partida.factor_X %></td>
                         <td><%= partida.factor_B %></td>
+                        <td><%= partida.resultado %></td>
                         <td>
-                            <%= 
-                            <select id="Resultado">
-
-                                <%
-                                var options = [ "Equipo A", "Equipo B", "Empate","Pendiente"];
-                                for ( var i = 0; i < options.length; i++ )
-                                {
-                                    var rselected = ( config[0].resultado == i ) ? "selected" : "";
-                                    %><option value="<%=options[ i ] %>" <%=rselected %>><%=i %></option><%
-                                }
-                                %>
-                            </select> 
-                            %>
-                        </td>
-                        <td>
-                            <a href="/partidas/crear/<%= partida.id %>" >Crear</a>
-                            <a href="/partidas/editar/<%= partida.id %>" >Editar</a>
-                            <a href="/partidas/eliminar/<%= partida.id %>" >Eliminar</a>
+                            <a href="/partidas/admin/editar/<%= partida.id %>" >Editar</a>
+                            <a href="/partidas/admin/eliminar/<%= partida.id %>" >Eliminar</a>
                         </td>
                     </tr>
                 <% }) %>
             </tbody>
         </table>
-
+        <a class="btn btn-primary" href="/partidas/admin">Vista Simple</a>
         <%- include('footer') %>
     </body>
 </html>

@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     equipo_A: DataTypes.STRING,
     equipo_B: DataTypes.STRING,
     estado: DataTypes.STRING,
-    resultado: DataTypes.STRING
+    resultado: DataTypes.STRING,
+    id_juego: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Partida',
