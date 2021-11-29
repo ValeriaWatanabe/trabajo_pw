@@ -11,7 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   //-----------Departamentos----------------------
+     //-----------Departamentos----------------------
      await queryInterface.bulkInsert('Departamento', [
       {
         nombre : "Lima",
@@ -19,7 +19,7 @@ module.exports = {
         updatedAt : new Date()
       },
       {
-        nombre : "Cusco",
+        nombre : "Cuzco",
         createdAt : new Date(), 
         updatedAt : new Date()
       },
@@ -83,6 +83,12 @@ module.exports = {
       id_prov : 1
     },
     {
+      nombre : "Cieneguilla",
+      createdAt : new Date(), 
+      updatedAt : new Date(),
+      id_prov : 2
+    },
+    {
       nombre : "Accha",
       createdAt : new Date(), 
       updatedAt : new Date(),
@@ -95,6 +101,12 @@ module.exports = {
       id_prov : 3
     },
     {
+      nombre : "Maras",
+      createdAt : new Date(), 
+      updatedAt : new Date(),
+      id_prov : 4
+    },
+    {
       nombre : "Marco",
       createdAt : new Date(), 
       updatedAt : new Date(),
@@ -105,9 +117,16 @@ module.exports = {
       createdAt : new Date(), 
       updatedAt : new Date(),
       id_prov : 5
+    },
+    {
+      nombre : "Acobamba",
+      createdAt : new Date(), 
+      updatedAt : new Date(),
+      id_prov : 6
     }
   ])
-  //--------------Clientes--------------------
+  
+  //-----------------Clientes-------------------------------
   await queryInterface.bulkInsert('Cliente', [
     {
       nombre : "Manuel Alejandro",
@@ -158,6 +177,7 @@ module.exports = {
       id_dist : 1
     }
   ])
+  
   //--------- Categoria---------------------
   await queryInterface.bulkInsert('Categoria', [
     {
