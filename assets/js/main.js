@@ -26,7 +26,6 @@ function recortar(array, inicio, fin, lugar) {
 
 $departemento.addEventListener('change', function() {
     let valor = $departemento.value
-    console.log(valor)
 
     switch(valor) {
         case 'Lima':
@@ -47,7 +46,7 @@ $departemento.addEventListener('change', function() {
 
 $provincia.addEventListener('change', function() {
     let valor = $provincia.value
-    console.log(valor)
+
     if(valor == 'Lima') {
         recortar(distritos, 0, 2, $distrito)
     } else if(valor == 'Cieneguilla') {

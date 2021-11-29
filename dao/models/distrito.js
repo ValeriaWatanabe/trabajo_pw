@@ -11,10 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Distrito.belongsTo(models.Provincia, {
+        foreignKey : 'id_prov'
+      })
     }
   };
   Distrito.init({
-    nombre: DataTypes.STRING
+    nombre: DataTypes.STRING,
+    id_prov: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Distrito',
