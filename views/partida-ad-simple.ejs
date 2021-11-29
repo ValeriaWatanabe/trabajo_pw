@@ -11,7 +11,7 @@
         <%- include('menu') %>
 
         <h2>Administrar Partidas</h2>
-        <a class="btn btn-success" href="/partidas/admin/crear">Crear</a>
+        <a class="btn btn-success" href="/partidasadmin/crear">Crear</a>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -27,20 +27,20 @@
                 <% partidas.forEach( (partida) => { %>
                     <tr>
                         <td><%= partida.id %></td>
-                        <td><%= partida.juegoNombre %></td> 
+                        <td><%= partida.juego %></td> 
                         <td><%= partida.fecha.toISOString().substring(0,10) %></td>
                         <td><%= partida.hora_inicio.toTimeString() %></td>
                         <td><%= partida.duracion %></td>
                         <td><%= partida.estado %></td>
                         <td>
-                            <a href="/partidas/admin/editar/<%= partida.id %>" >Editar</a>
-                            <a href="/partidas/admin/eliminar/<%= partida.id %>" >Eliminar</a>
+                            <a href="/partidasadmin/editar/<%= partida.id %>" >Editar</a>
+                            <a href="/partidasadmin/eliminar/<%= partida.id %>" >Eliminar</a>
                         </td>
                     </tr>
                 <% }) %>
             </tbody>
         </table>
-        <a class="btn btn-primary" href="/partidas/admcompleta">Vista completa</a>
+        <a class="btn btn-primary" href="/partidasadmcompleta">Vista completa</a>
         <%- include('footer') %>
     </body>
 </html>
