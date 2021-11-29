@@ -29,7 +29,7 @@
                         <td><%= partida.id %></td>
                         <td><%= juego.nombre %></td> 
                         <td><%= partida.fecha.toISOString().substring(0,10) %></td>
-                        <td><%= partida.hora_inicio %></td>
+                        <td><%= partida.hora_inicio.toTimeString() %></td>
                         <td><%= partida.duracion %></td>
                         <td><%= partida.estado %></td>
                         <td>
