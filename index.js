@@ -298,26 +298,25 @@ app.get('/categoria/eliminar/:codigo', async (req, res) => {
 app.get('/partidasadmin', async (req, res) => {
     const partidas = await db.Partida.findAll({
         order : [
-            ['fecha','DESC']
+            ['fecha','DESC'],
             ['hora_inicio','DESC']
         ]
     });
 
-
     let listaSimplePartida = []
-    for (let partida of partidas) {
-        const juego = await partida.getJuego()
-        listaSimplePartida.push({
-            id : partida.id,
-            juego : juego.nombre,
-            fecha : partida.fecha,
-            hora_inicio : partida.hora_inicio,
-            duracion : partida.duracion,
-            estado : partida.estado
-        })
-    }    
+        for (let partida of partidas) {
+            listaSimplePartida.push({
+                id : partida.id,
+                id_juego : partida.id_juego,
+                fecha : partida.fecha,
+                hora_inicio : partida.hora_inicio,
+                duracion : partida.duracion,
+                estado : partida.estado
+            })
+        }
+            
 
-    res.render('partidas-ad-simple', {
+    res.render('partida-ad-simple', {
         partidas : listaSimplePartida
     })
 })
@@ -328,32 +327,31 @@ app.get('/partidasadmin', async (req, res) => {
 app.get('/partidasadmcompleta', async (req, res) => {
     const partidas = await db.Partida.findAll({
         order : [
-            ['fecha','DESC']
+            ['fecha','DESC'],
             ['hora_inicio','DESC']
         ]
     });
 
 
     let listaAvPartida = []
-    for (let partida of partidas) {
-        const juego = await partida.getJuego()
-        listaAvPartida.push({
-            id : partida.id,
-            juego : juego.nombre,
-            fecha : partida.fecha,
-            hora_inicio : partida.hora_inicio,
-            duracion : partida.duracion,
-            estado : partida.estado,
-            equipo_A : partida.equipo_A,
-            equipo_B : partida.equipo_B,
-            factor_A : partida.factor_A,
-            factor_X : partida.factor_X,
-            factor_B : partida.factor_B,
-            resultado : partida.resultado
-        })
-    }    
+        for (let partida of partidas) {
+            listaAvPartida.push({
+                id : partida.id,
+                id_juego : partida.id_juego,
+                fecha : partida.fecha,
+                hora_inicio : partida.hora_inicio,
+                duracion : partida.duracion,
+                estado : partida.estado,
+                equipo_A : partida.equipo_A,
+                equipo_B : partida.equipo_B,
+                factor_A : partida.factor_A,
+                factor_X : partida.factor_X,
+                factor_B : partida.factor_B,
+                resultado : partida.resultado
+            })
+        }    
 
-    res.render('partidas-ad-avanzada', {
+    res.render('partida-ad-avanzada', {
         partidas : listaAvPartida
     })
 })
@@ -362,15 +360,16 @@ app.get('/partidasadmcompleta', async (req, res) => {
 //---------------------CREAR PARTIDA-------------------------
 //-----------------------------------------------------------
 app.get('/partidasadmin/crear', async (req, res) => {
+    const juego = await db.Juego.findAll()
     const partida = await db.Partida.findAll()
 
     res.render('partida-ad-crear',{
+        juego : juego,
         partida : partida
     })
 })
 
-app.post('/partidaadmin/crear', async (req, res) => {
-    const partidaJuegoId = req.body.partida_juego_id
+app.post('/partidasadmin/crear', async (req, res) => {
     const partidaFecha = req.body.partida_fecha
     const partidaHoraInicio = req.body.partida_hora_inicio
     const partidaDuracion = req.body.partida_duracion
@@ -381,10 +380,10 @@ app.post('/partidaadmin/crear', async (req, res) => {
     const partidaFX = req.body.partida_fx
     const partidaFB = req.body.partida_fb
     const partidaResultado = req.body.partida_resultado
+    const partidaJuegoId = req.body.partidaJuegoId
 
 
     await db.Partida.create({
-        id_juego : partidaJuegoId,
         fecha : partidaFecha,
         hora_inicio : partidaHoraInicio,
         duracion : partidaDuracion,
@@ -394,14 +393,16 @@ app.post('/partidaadmin/crear', async (req, res) => {
         factor_A : partidaFA,
         factor_X : partidaFX,
         factor_B : partidaFB,
-        resultado : partidaResultado
+        resultado : partidaResultado,
+        id_juego : partidaJuegoId,
+        id_categoria : 1
     })
 
     res.redirect('/partidasadmin')
 })
 
 //-----------------------------------------------------------
-//--------------------EDITAR PARTIDA-------------------------
+//--------------------EDITAR PARTIDA-------------------------          
 //-----------------------------------------------------------
 app.get('/partidasadmin/editar/:codigo', async (req, res) => {
     const id_partida = req.params.codigo
@@ -411,40 +412,46 @@ app.get('/partidasadmin/editar/:codigo', async (req, res) => {
             id : id_partida
         }
     })
+
+    const juego = await db.Juego.findAll()
+
     res.render('partida-ad-editar', {
-        partida : partida
+        partida : partida,
+        juego : juego
     })
 })
 
 app.post('/partidasadmin/editar', async (req, res) => {
-    const partidaJuegoId = req.body.partida_juego_id
     const partidaFecha = req.body.partida_fecha
     const partidaHoraInicio = req.body.partida_hora_inicio
     const partidaDuracion = req.body.partida_duracion
-    const partidaEstado = req.body.partida_estado
+    const partidaFA = req.body.partida_fa
+    const partidaFB = req.body.partida_fb
+    const partidaFX = req.body.partida_fx
     const partidaEA = req.body.partida_ea
     const partidaEB = req.body.partida_eb
-    const partidaFA = req.body.partida_fa
-    const partidaFX = req.body.partida_fx
-    const partidaFB = req.body.partida_fb
+    const partidaEstado = req.body.partida_estado
     const partidaResultado = req.body.partida_resultado
+    const partidaJuegoId = req.body.partidaJuegoId
 
     const partida = await db.Partida.findOne({
         where : {
-            id : id_partida
+            id : partidaJuegoId
         }
     })
-    partida.id_juego = partidaJuegoId
+    
+
     partida.fecha = partidaFecha
     partida.hora_inicio = partidaHoraInicio
     partida.duracion = partidaDuracion
-    partida.estado = partidaEstado
-    partida.equipo_A = partidaEA
-    partida.equipo_B = partidaEB
     partida.factor_A = partidaFA
     partida.factor_X = partidaFX
     partida.factor_B = partidaFB
+    partida.equipo_A = partidaEA
+    partida.equipo_B = partidaEB
+    partida.estado = partidaEstado
     partida.resultado = partidaResultado
+    partida.id_juego = partidaJuegoId
 
     await partida.save()
 
@@ -456,14 +463,27 @@ app.post('/partidasadmin/editar', async (req, res) => {
 //--------------------ELIMINAR PARTIDA-----------------------
 //-----------------------------------------------------------
 app.get('/partidasadmin/eliminar/:codigo', async (req, res) => {
-    const id_partida = req.params.codigo
+    const idPartida = req.params.codigo
     await db.Partida.destroy({
         where : {
-            id : id_partida
+            id : idPartida
         }
     })
-
     res.redirect('/partidasadmin')
+})
+
+//-----------------------------------------------------------
+//----------------------MENU---------------------------------
+//-----------------------------------------------------------
+app.get('/menu', async (req,res) => {
+    const banners = await db.Banners.findAll({
+        order : [
+            ['id', 'ASC']
+        ]
+    });
+    res.render('menu', {
+        banners : banners
+    })
 })
 
 app.get('/banners', async (req, res) => {
